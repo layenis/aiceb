@@ -1,0 +1,7 @@
+<?php
+	# Função para carregar o endereço
+	
+	$cep = (int) get('cep');
+	
+	
+?>
