@@ -1,48 +1,15 @@
 <?php
 	session_start();
-  
+	
 	require_once(CONTROLLERS . 'atasregionaisController.php');
-	require_once(CONTROLLERS . 'regionaisController.php');
 	
 	$atasregionaisController = new AtasRegionaisController();
-	$atasregionais = new AtasRegionais();	
-  
-	# inicializar erro
-	$erro = array(); 		
+	$atasregionais = new AtasRegionais();
 	
-	if(isset($_POST['action']))
-	{
-		$atasregionais->assignIdentifier($_POST['id']);
-			
-		# recuperar os campos
-		$atasregionais = $atasregionais->recuperarCampos($atasregionais, $_POST, 'editar');
-		  
-		#validacao 
-		$erro = $atasregionais->validar($atasregionais);    
-		
-		if (count($erro) == 0)
-		{
-			#validar alguns campos
-			$atasregionais->data_ata = formataDataBanco($atasregionais->data_ata);
-
-			$atasregionais->modified_at = date('Y-m-d H:i:s');
-
-			# salvar
-			$atasregionaisController->salvar($atasregionais);
-		}
-		else
-		{
-			# mensagem de erro
-			setMensagem('Todos os campos em destaque devem ser digitados corretamente');
-		}  
-	}
-	elseif(($id = (int) $_GET['id']) != 0)
+	if(($id = (int) $_GET['id']) != 0)
 	{
 		# pesquisa pelo id
 		$atasregionais = $atasregionaisController->buscaPorId($id);
-		
-		# Formata campos
-		$atasregionais->data_ata = formataData($atasregionais->data_ata);
 		
 		if($atasregionais == false)
 		{
@@ -50,6 +17,9 @@
 			header('Location: ' . URL . 'atasregionais/index'); 
 			exit;
 		}
+		
+		# validar alguns campos
+		$atasregionais->data_ata = formataData($atasregionais->data_ata);
 	}
 	else
 	{
@@ -58,8 +28,6 @@
 		exit;
 	}
 	
-	# ativar a aba
-	$actionInserir = 'active';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -79,22 +47,8 @@
 	<script type="text/javascript" src="<?=JS_URL?>superfish.js"></script>
 	<script src="<?=JS_URL?>jquery.maskedinput-1.2.2.min.js" type="text/javascript"></script>
 	
+	<script type="text/javascript" src="<?=JS_URL?>validacoes.js"></script>
 </head>
-
-<script>
-
-jQuery(function($)
-{
-   $("#data_ata").mask("99/99/9999");
-});
-
-$(document).ready(function()
-{	
-	$('#titulo').limit('80', '#count-titulo');
-	$('#descricao').limit('1400', '#count-descricao');
-});
-
-</script>
 
 <body>
 	
@@ -103,32 +57,45 @@ $(document).ready(function()
 		<? include(LAYOUTS . 'topo.php'); ?>
         
         <div id="meio">
-	  
-    <? include(VIEWS . 'atasregionais' . DS . 'sub-menu.php'); ?>
-        
-	<div class="meio-conteudo-borda">
+			
+			<? include(VIEWS . 'atasregionais' . DS . 'sub-menu.php'); ?>
+			
+			<div class="meio-conteudo-borda">
 				<div class="meio-conteudo">
-					
-					<?
-						$_mensagem = getMensagem();
-						if(!empty($_mensagem))
-						{
-					?>
-					<div class="mensagem-sistema erro-s">
-						<span><?=$_mensagem?></span>
+
+					<div class="print-vs">
+						<span><a href="<?=URL . 'atasregionais/imprimir/?id=' . $id?>">Imprimir</a></span>
+						<span>Enviar por Email</span>
 					</div>
-					<?
-						}
-					?>
 					
 					<div class="conteudo-rg">
-						<form name="" method="post" action="">
-							<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tabela-vs">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tabela-vs">
 							
-								<? include('z-campos.php'); ?>		
+							<tr class="marcador-vs">
+								<td colspan="2">Dados da Ata</td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Número:&nbsp;</td>
+								<td><?=$atasregionais->numero?></td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Data:&nbsp;</td>
+								<td><?=$atasregionais->data_ata?></td>
+							</tr>	
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Título:&nbsp;</td>
+								<td><?=$atasregionais->titulo?></td>
+							</tr>	
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Descrição:&nbsp;</td>
+								<td><?=$atasregionais->descricao?></td>
+							</tr>
 								
-							</table>
-						</form>
+						</table>
 					</div>
 					
 				</div>

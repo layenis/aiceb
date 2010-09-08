@@ -133,7 +133,7 @@
 								</td>						
 								
 								<!-- -->
-								<!--<td class="no-borda-right" align="right"><a href="<?=URL?>agendasgerais/recibo/?id=<?=$agendasgerais[$i]['id']?>" title="Emitir Recibo"><img src="<?=IMG_URL?>visualizar.png" /></td>-->
+								<td class="no-borda-right" align="right"><a href="<?=URL?>agendasgerais/visualizar/?id=<?=$agendasgerais[$i]['id']?>" title="Visualizar Registro"><img src="<?=IMG_URL?>visualizar.png" /></td>
 								<td class="no-borda-right"><a href="<?=URL?>agendasgerais/excluir/?id=<?=$agendasgerais[$i]['id']?>" title="Remover Registro"><img src="<?=IMG_URL?>remover.png" /></td>
 							
 							</tr>

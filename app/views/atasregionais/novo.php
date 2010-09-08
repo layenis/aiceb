@@ -8,7 +8,7 @@
 	$atasregionaisController = new AtasRegionaisController();
 	$atasregionais = new AtasRegionais();	
 	
-	#inicializar erro
+	# inicializar erro
 	$erro = array();
 	
 	if(isset($_POST['action']))
@@ -16,12 +16,12 @@
 		# recuperar os campos
 		$atasregionais = $atasregionais->recuperarCampos($atasregionais, $_POST, 'novo');
 
-		#validacao 
+		# validacao 
 		$erro = $atasregionais->validar($atasregionais);
 
 		if (count($erro) == 0)
 		{
-			#validar alguns campos
+			# validar alguns campos
 			$atasregionais->data_ata = formataDataBanco($atasregionais->data_ata);
 			
 			$atasregionais->regional_id = $_SESSION['USUARIO_REGIONAL_ID'];

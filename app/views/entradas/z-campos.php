@@ -92,7 +92,7 @@
 <tr class="dados-vs">
 	<td colspan="2" align="center">
 		<input type="submit" name="enviar-filtro" value="Enviar" class="botao-filtro" />
-		<input type="button" name="enviar-filtro" value="Voltar" class="botao-filtro" />
+		<input onclick="javascript: history.back();" type="button" name="enviar-filtro" value="Voltar" class="botao-filtro" />
 	</td>
 </tr>
 

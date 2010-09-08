@@ -1,9 +1,9 @@
 <?php
 	class Controller
 	{
-		function lay()
+		function teste()
 		{
-			echo 'sabedoria suprema => lay';
+			echo 'Fabricio Souza';
 		}
 	}
 ?>

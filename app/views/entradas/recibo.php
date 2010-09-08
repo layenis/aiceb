@@ -18,8 +18,6 @@
 	
 	$igreja = $igrejasController->buscaPorId($entrada->igreja_id);
 		
-	# ativar a aba
-	$actionInserir = 'active';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -53,6 +51,11 @@
         
 	<div class="meio-conteudo-borda">
 				<div class="meio-conteudo">
+				
+					<div class="print-vs">
+						<span><a href="<?=URL . 'entradas/imprimir/?id=' . $id?>">Imprimir</a></span>
+						<span>Enviar por Email</span>
+					</div>
 										
 					<div class="conteudo-rg">
 					Recibo R$<?=$entrada->valor?> <br>

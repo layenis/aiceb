@@ -1,4 +1,5 @@
 <?php
+
 	session_start();
   
 	require_once(CONTROLLERS . 'regionaisController.php');
@@ -76,34 +77,42 @@
 							}
 						?>
 						
-					<form name="filtros" method="get" action="<?=URL . 'regionais/index/'?>">
+			   	<form name="filtros" method="get" action="<?=URL . 'regionais/index/'?>">
 						
 							<div class="bloco-ft">
 								<label>Nome</label>
 								<input class="text-edit" type="text" name="nome" id="nome" value="<?=$nome?>" size="40" maxlength="40" />
 							</div>
 		            
-							<div class="box-botao">
+            <div class="box-botao">
 								<input type="submit" name="enviar-filtro" value="Enviar" class="botao-filtro" />
-							</div>
+						</div>
 					</form>
 				</div>
 				
-				<!-- paginacao -->
-				<? include(LAYOUTS . 'paginacao.php'); ?>
+				<div class="conteudo-pg">
+						<span class="info-pg">Listando <?=$paginacao['primeiro_indice']?> até <?=$paginacao['ultimo_indice']?> de <?=$paginacao['total_resultados']?> registros</span>
+						
+						<div class="paginacao">
+							<div class="botoes-pg radios-left"><a href="<?=$paginacao['primeiro']?>" title="Primeiro">Primeiro</a></div>
+							<div class="botoes-pg"><a href="<?=$paginacao['anterior']?>" title="Anterior">Anterior</a></div>
+							<div class="botoes-pg"><?=$paginacao['pagina_atual']?></div>
+							<div class="botoes-pg"><a href="<?=$paginacao['proximo']?>" title="Próximo">Próximo</a></div>
+							<div class="botoes-pg radios-right"><a href="<?=$paginacao['ultimo']?>" title="Último">Último</a></div>
+						</div>
+			 </div>
 			 
 			 	<div class="conteudo-rg">					
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tabela-rg">
 							
 							<!-- titulo dos campos listados -->
 							<tr class="menu-rg">
-							<th align="center" width="100">Código</th>
-							<th align="left" width="530">Nome</th>
-							<th width="80">Status</th>
-
-							
-							<!-- -->
-							<th class="no-borda-right" colspan="2">Ações</th>
+							<th align="left" width="100">Código</th>
+							<th align="left" width="500">Nome</th>
+								<th width="100">Status</th>
+								
+								<!-- -->
+								<th class="no-borda-right" colspan="2">Ações</th>
 							</tr>
 							
 							<!-- campos a serem listados > bg > active-tr -->
@@ -113,7 +122,7 @@
 								for($i=0; $i<$total; $i++)
 								{
 									if($x % 2 == 0) $bg = 'active-tr'; else $bg = '';
-								
+									
 									# regras de negócios para status
 									if($regionais[$i]['status'] == 1)
 									{
@@ -131,19 +140,14 @@
 								<td align="left">
 									<strong><a href="<?=URL?>regionais/editar/?id=<?=$regionais[$i]['id']?>" title="<?=$regionais[$i]['nome']?>"><?=$regionais[$i]['nome']?></a></strong>
 								</td>
-
+								
 								<!-- status -->
 								<td id="status-<?=$regionais[$i]['id']?>"><?=$status?></td>
 								
 								<!-- -->
-								<td class="no-borda-right" align="center"><a href="<?=URL?>regionais/visualizar/?id=<?=$regionais[$i]['id']?>" title="Visualizar Registro"><img src="<?=IMG_URL?>visualizar.png" /></td>
-								<td class="no-borda-right" align="center">
-								
-								<? if($_SESSION['USUARIO_GRAU_PERMISSAO'] == 3) { ?>
-								<a href="<?=URL?>regionais/excluir/?id=<?=$regionais[$i]['id']?>" title="Remover Registro"><img src="<?=IMG_URL?>remover.png" />
-								<? } ?>
-								
-								</td>
+								<!--<td class="no-borda-right" align="right"><a href="visualizar.html" title="Visualizar Registro"><img src="<?=IMG_URL?>visualizar.png" /></td>-->
+								<td class="no-borda-right"><a href="<?=URL?>regionais/excluir/?id=<?=$regionais[$i]['id']?>" title="Remover Registro"><img src="<?=IMG_URL?>remover.png" /></td>
+							
 							</tr>
 							<?
 									$x++;

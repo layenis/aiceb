@@ -138,7 +138,7 @@
 								</td>						
 								
 								<!-- -->
-								<!--<td class="no-borda-right" align="right"><a href="<?=URL?>agendasregionais/recibo/?id=<?=$agendasregionais[$i]['id']?>" title="Emitir Recibo"><img src="<?=IMG_URL?>visualizar.png" /></td>-->
+								<td class="no-borda-right" align="right"><a href="<?=URL?>agendasregionais/visualizar/?id=<?=$agendasregionais[$i]['id']?>" title="Visualizar registro"><img src="<?=IMG_URL?>visualizar.png" /></td>
 								<td class="no-borda-right"><a href="<?=URL?>agendasregionais/excluir/?id=<?=$agendasregionais[$i]['id']?>" title="Remover Registro"><img src="<?=IMG_URL?>remover.png" /></td>
 							
 							</tr>

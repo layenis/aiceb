@@ -1,4 +1,5 @@
 <?php
+
 	session_start();
   
 	require_once(CONTROLLERS . 'atasregionaisController.php');
@@ -81,18 +82,18 @@
 							}
 						?>
 						
-			   	<form name="filtros" method="get" action="<?=URL . 'atasregionais/index/'?>">
-						
+						<form name="filtros" method="get" action="<?=URL . 'atasregionais/index/'?>">
+							
 							<div class="bloco-ft">
 								<label>Título:</label>
 								<input class="text-edit" type="text" name="titulo" id="titulo" value="<?=$titulo?>" size="40" maxlength="40" />
 							</div>
-		            
-            <div class="box-botao">
-								<input type="submit" name="enviar-filtro" value="Enviar" class="botao-filtro" />
-						</div>
-					</form>
-				</div>
+						
+							<div class="box-botao">
+									<input type="submit" name="enviar-filtro" value="Enviar" class="botao-filtro" />
+							</div>
+						</form>
+					</div>
 				
 				<div class="conteudo-pg">
 						<span class="info-pg">Listando <?=$paginacao['primeiro_indice']?> até <?=$paginacao['ultimo_indice']?> de <?=$paginacao['total_resultados']?> registros</span>
@@ -104,7 +105,7 @@
 							<div class="botoes-pg"><a href="<?=$paginacao['proximo']?>" title="Próximo">Próximo</a></div>
 							<div class="botoes-pg radios-right"><a href="<?=$paginacao['ultimo']?>" title="Último">Último</a></div>
 						</div>
-			 </div>
+				</div>
 			 
 			 	<div class="conteudo-rg">					
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tabela-rg">
@@ -138,7 +139,7 @@
 								</td>						
 								
 								<!-- -->
-								<!--<td class="no-borda-right" align="right"><a href="<?=URL?>atasregionais/recibo/?id=<?=$atasregionais[$i]['id']?>" title="Emitir Recibo"><img src="<?=IMG_URL?>visualizar.png" /></td>-->
+								<td class="no-borda-right" align="right"><a href="<?=URL?>atasregionais/visualizar/?id=<?=$atasregionais[$i]['id']?>" title="Visualizar registro"><img src="<?=IMG_URL?>visualizar.png" /></td>
 								<td class="no-borda-right"><a href="<?=URL?>atasregionais/excluir/?id=<?=$atasregionais[$i]['id']?>" title="Remover Registro"><img src="<?=IMG_URL?>remover.png" /></td>
 							
 							</tr>
