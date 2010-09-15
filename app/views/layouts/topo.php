@@ -25,7 +25,7 @@
 					<li><a href="#">Relatórios</a></li>							
 					<li><a href="/atasdirgeral">Atas</a></li>
 					<li><a href="#abb">Boletins</a></li>
-					<li><a href="/recibos/novo">Recibos</a></li>
+					<li><a href="/membrosdirgeral">Membros</a></li>
 					<li><a href="/agendasgerais">Agenda do Presidente</a></li>
 				</ul>
 			</li>

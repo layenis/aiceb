@@ -67,9 +67,8 @@ abstract class BaseAgendasRegionais extends Doctrine_Record
              'notnull' => false,
              'autoincrement' => false,
              ));
-        $this->hasColumn('descricao', 'string', 100, array(
+        $this->hasColumn('descricao', 'string', null, array(
              'type' => 'string',
-             'length' => 100,
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,

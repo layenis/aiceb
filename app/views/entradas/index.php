@@ -126,7 +126,11 @@
 								<td><?=$entradas[$i]['valor']?></td>								
 								
 								<!-- -->
+<<<<<<< HEAD
 								<td class="no-borda-right" align="right"><a href="<?=URL?>entradas/recibo/?id=<?=$entradas[$i]['id']?>" title="Emitir Recibo"><img src="<?=IMG_URL?>remover.png" /></td>
+=======
+								<td class="no-borda-right" align="right"><a href="<?=URL?>entradas/recibo/?id=<?=$entradas[$i]['id']?>" title="Emitir Recibo"><img src="<?=IMG_URL?>recibo.png" /></td>
+>>>>>>> layenis/master
 								<td class="no-borda-right"><a href="<?=URL?>entradas/visualizar/?id=<?=$entradas[$i]['id']?>" title="Visualizar Registro"><img src="<?=IMG_URL?>visualizar.png" /></td>
 								<td class="no-borda-right"><a href="<?=URL?>entradas/excluir/?id=<?=$entradas[$i]['id']?>" title="Remover Registro"><img src="<?=IMG_URL?>remover.png" /></td>
 							

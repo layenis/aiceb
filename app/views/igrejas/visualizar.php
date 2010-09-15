@@ -70,8 +70,8 @@
 				<div class="meio-conteudo">
 
 					<div class="print-vs">
-						<span>Imprimir</span>
-						<span><a id="enviar-email" href="/igrejas/enviar-email">Enviar por Email</a></span>
+						<span><a href="<?=URL . 'igrejas/imprimir/?id=' . $id?>">Imprimir</a></span>
+						<span><a href="<?=URL . 'igrejas/enviar_email/?id=' . $id?>">Enviar por Email</a></span>
 					</div>
 					
 					<div class="conteudo-rg">
