@@ -27,7 +27,7 @@ abstract class BaseRegionais extends Doctrine_Record
              'type' => 'integer',
              'length' => 4,
              'fixed' => false,
-             'unsigned' => true,
+             'unsigned' => false,
              'primary' => true,
              'autoincrement' => true,
              ));
@@ -35,9 +35,8 @@ abstract class BaseRegionais extends Doctrine_Record
              'type' => 'integer',
              'length' => 4,
              'fixed' => false,
-             'unsigned' => true,
+             'unsigned' => false,
              'primary' => false,
-             'default' => '0',
              'notnull' => false,
              'autoincrement' => false,
              ));
@@ -47,7 +46,7 @@ abstract class BaseRegionais extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => false,
+             'notnull' => true,
              'autoincrement' => false,
              ));
         $this->hasColumn('descricao', 'string', 255, array(
@@ -79,7 +78,7 @@ abstract class BaseRegionais extends Doctrine_Record
              'type' => 'integer',
              'length' => 1,
              'fixed' => false,
-             'unsigned' => true,
+             'unsigned' => false,
              'primary' => false,
              'notnull' => false,
              'autoincrement' => false,

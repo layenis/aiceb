@@ -159,7 +159,7 @@
 								<td id="status-<?=$obreiros[$i]['id']?>"><?=$status?></td>
 								
 								<!-- -->
-								<!--<td class="no-borda-right" align="right"><a href="visualizar.html" title="Visualizar Registro"><img src="<?=IMG_URL?>visualizar.png" /></td>-->
+								<td class="no-borda-right" align="right"><a href="<?=URL?>obreiros/visualizar/?id=<?=$obreiros[$i]['id']?>" title="Visualizar Registro"><img src="<?=IMG_URL?>visualizar.png" /></td>
 								<td class="no-borda-right"><a href="<?=URL?>obreiros/excluir/?id=<?=$obreiros[$i]['id']?>" title="Remover Registro"><img src="<?=IMG_URL?>remover.png" /></td>
 							
 							</tr>

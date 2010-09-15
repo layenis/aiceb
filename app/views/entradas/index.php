@@ -3,7 +3,7 @@
   
 	require_once(CONTROLLERS . 'entradasController.php');
 	require_once(CONTROLLERS . 'igrejasController.php');
-	
+		
 	$entradasController = new EntradasController();
 	
 	# paginacao
@@ -90,30 +90,21 @@
 					</form>
 				</div>
 				
-				<div class="conteudo-pg">
-						<span class="info-pg">Listando <?=$paginacao['primeiro_indice']?> até <?=$paginacao['ultimo_indice']?> de <?=$paginacao['total_resultados']?> registros</span>
-						
-						<div class="paginacao">
-							<div class="botoes-pg radios-left"><a href="<?=$paginacao['primeiro']?>" title="Primeiro">Primeiro</a></div>
-							<div class="botoes-pg"><a href="<?=$paginacao['anterior']?>" title="Anterior">Anterior</a></div>
-							<div class="botoes-pg"><?=$paginacao['pagina_atual']?></div>
-							<div class="botoes-pg"><a href="<?=$paginacao['proximo']?>" title="Próximo">Próximo</a></div>
-							<div class="botoes-pg radios-right"><a href="<?=$paginacao['ultimo']?>" title="Último">Último</a></div>
-						</div>
-			 </div>
+				<!-- paginacao -->
+				<? include(LAYOUTS . 'paginacao.php'); ?>
 			 
 			 	<div class="conteudo-rg">					
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tabela-rg">
 							
 							<!-- titulo dos campos listados -->
 							<tr class="menu-rg">
-								<th align="left" width="100">Data</th>
+								<th align="center" width="100">Data</th>
 								<th align="left" width="300">Igreja</th>
-								<th align="left" width="100">Mês do depósito</th>
+								<th align="center" width="100">Mês do depósito</th>
 								<th width="100">Valor</th>
 								
 								<!-- -->
-								<th class="no-borda-right" colspan="2">Ações</th>
+								<th class="no-borda-right" colspan="3">Ações</th>
 							</tr>
 							
 							<!-- campos a serem listados > bg > active-tr -->
@@ -126,18 +117,17 @@
 							
 							<tr class="listar-rg <?=$bg?>">
 								
-								<td align="left">
-									<strong><a href="<?=URL?>entradas/editar/?id=<?=$entradas[$i]['id']?>" title="<?=$entradas[$i]['data_entrada']?>"><?=formataData($entradas[$i]['data_entrada'])?></a></strong>
-								</td>
+								<td align="center"><?=formataData($entradas[$i]['data_entrada'])?></a></strong></td>
 								
-								<td><?=$entradas[$i]['Igrejas']['nome_fantasia']?></td>
+								<td align="left"><strong><a href="<?=URL?>entradas/editar/?id=<?=$entradas[$i]['id']?>" title="<?=$entradas[$i]['data_entrada']?>"><?=$entradas[$i]['Igrejas']['nome_fantasia']?></a></td>
 								
-								<td><?=$entradas[$i]['mes_deposito']?></td>								
+								<td align="center"><?=$entradas[$i]['mes_deposito']?></td>								
 								
 								<td><?=$entradas[$i]['valor']?></td>								
 								
 								<!-- -->
-								<td class="no-borda-right" align="right"><a href="<?=URL?>entradas/recibo/?id=<?=$entradas[$i]['id']?>" title="Emitir Recibo"><img src="<?=IMG_URL?>visualizar.png" /></td>
+								<td class="no-borda-right" align="right"><a href="<?=URL?>entradas/recibo/?id=<?=$entradas[$i]['id']?>" title="Emitir Recibo"><img src="<?=IMG_URL?>recibo.png" /></td>
+								<td class="no-borda-right"><a href="<?=URL?>entradas/visualizar/?id=<?=$entradas[$i]['id']?>" title="Visualizar Registro"><img src="<?=IMG_URL?>visualizar.png" /></td>
 								<td class="no-borda-right"><a href="<?=URL?>entradas/excluir/?id=<?=$entradas[$i]['id']?>" title="Remover Registro"><img src="<?=IMG_URL?>remover.png" /></td>
 							
 							</tr>

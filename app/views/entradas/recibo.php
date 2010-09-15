@@ -1,25 +1,39 @@
 <?php
-
 	session_start();
 	
-	$id = $_GET['id'];
-  
 	require_once(CONTROLLERS . 'entradasController.php');
 	require_once(CONTROLLERS . 'igrejasController.php');
 	
-	$igrejasController = new IgrejasController();
-	$igreja = new Igrejas();
-		
 	$entradasController = new EntradasController();
-	$entrada = new Entradas();
-  
-  	# pesquisa pelo id
-	$entrada = $entradasController->buscaPorId($id);
+	$entradas = new Entradas();
 	
-	$igreja = $igrejasController->buscaPorId($entrada->igreja_id);
+	$igrejasController = new IgrejasController();
+	$igrejas = new Igrejas();
+	
+	if(($id = (int) $_GET['id']) != 0)
+	{
+		# pesquisa pelo id
+		$entradas = $entradasController->buscaPorId($id);
 		
-	# ativar a aba
-	$actionInserir = 'active';
+		# pesquisa a regional pelo id
+		$igrejas = $igrejasController->buscaPorId($entradas->igreja_id);
+				
+		if($entradas == false)
+		{
+			setMensagem("Registro inválido");
+			header('Location: ' . URL . 'entradas/index'); 
+			exit;
+		}
+		
+		# validar alguns campos
+		$entradas->data_entrada = formataData($entradas->data_entrada);
+	}
+	else
+	{
+		setMensagem("Registro inválido");
+		header('Location: ' . URL . 'entradas/index'); 
+		exit;
+	}		
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -53,14 +67,19 @@
         
 	<div class="meio-conteudo-borda">
 				<div class="meio-conteudo">
+				
+					<div class="print-vs">
+						<span><a href="<?=URL . 'entradas/imprimir_recibo/?id=' . $id?>">Imprimir</a></span>
+						<span><a href="<?=URL . 'entradas/email_recibo/?id=' . $id?>">Enviar por Email</a></span>
+					</div>
 										
 					<div class="conteudo-rg">
-					Recibo R$<?=$entrada->valor?> <br>
-					Recebemos de <?=$igreja->nome_fantasia?> <br> 
-					a importância de <?=extenso($entrada->valor)?> <br>
-					referente ao mês de <?=$entrada->mes_deposito?> <br>
-										
-					Cidade-UF, <?=formataData($entrada->data_entrada)?>
+						Recibo R$<?=$entradas->valor?> <br>
+						Recebemos de <?=$igrejas->nome_fantasia?> <br> 
+						a importância de <?=extenso($entradas->valor)?> <br>
+						referente ao mês de <?=$entradas->mes_deposito?> <br>
+											
+						<?=$igrejas->cidade_id . '-' . $igrejas->estado_id . ', ' . $entradas->data_entrada?>
 					</div>
 					
 				</div>

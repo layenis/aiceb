@@ -114,6 +114,7 @@ $(document).ready(function()
 				</div>
 			</div>
         </div>
+	</div>
         
 		<? include(LAYOUTS . 'rodape.php'); ?>
 		

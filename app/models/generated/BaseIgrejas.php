@@ -76,9 +76,8 @@ abstract class BaseIgrejas extends Doctrine_Record
              'type' => 'integer',
              'length' => 4,
              'fixed' => false,
-             'unsigned' => true,
+             'unsigned' => false,
              'primary' => false,
-             'default' => '0',
              'notnull' => false,
              'autoincrement' => false,
              ));

@@ -41,7 +41,7 @@
 		# pesquisa pelo id
 		$atasregionais = $atasregionaisController->buscaPorId($id);
 		
-		#Formata campos
+		# Formata campos
 		$atasregionais->data_ata = formataData($atasregionais->data_ata);
 		
 		if($atasregionais == false)
