@@ -7,8 +7,6 @@
  * 
  * @property integer $id
  * @property integer $regional_id
- * @property integer $estado_id
- * @property integer $cidade_id
  * @property integer $codigo
  * @property string $nome_fantasia
  * @property string $razao_social
@@ -20,6 +18,8 @@
  * @property string $complemento
  * @property string $bairro
  * @property string $cep
+ * @property string $estado
+ * @property string $cidade
  * @property timestamp $created_at
  * @property timestamp $modified_at
  * @property integer $status
@@ -43,26 +43,6 @@ abstract class BaseIgrejas extends Doctrine_Record
              'autoincrement' => true,
              ));
         $this->hasColumn('regional_id', 'integer', 4, array(
-             'type' => 'integer',
-             'length' => 4,
-             'fixed' => false,
-             'unsigned' => true,
-             'primary' => false,
-             'default' => '0',
-             'notnull' => false,
-             'autoincrement' => false,
-             ));
-        $this->hasColumn('estado_id', 'integer', 4, array(
-             'type' => 'integer',
-             'length' => 4,
-             'fixed' => false,
-             'unsigned' => true,
-             'primary' => false,
-             'default' => '0',
-             'notnull' => false,
-             'autoincrement' => false,
-             ));
-        $this->hasColumn('cidade_id', 'integer', 4, array(
              'type' => 'integer',
              'length' => 4,
              'fixed' => false,
@@ -164,6 +144,24 @@ abstract class BaseIgrejas extends Doctrine_Record
         $this->hasColumn('cep', 'string', 9, array(
              'type' => 'string',
              'length' => 9,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('estado', 'string', 2, array(
+             'type' => 'string',
+             'length' => 2,
+             'fixed' => false,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             ));
+        $this->hasColumn('cidade', 'string', 120, array(
+             'type' => 'string',
+             'length' => 120,
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,

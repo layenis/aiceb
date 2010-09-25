@@ -29,7 +29,7 @@ abstract class BaseEntradas extends Doctrine_Record
              'type' => 'integer',
              'length' => 4,
              'fixed' => false,
-             'unsigned' => false,
+             'unsigned' => true,
              'primary' => true,
              'autoincrement' => true,
              ));
@@ -37,8 +37,9 @@ abstract class BaseEntradas extends Doctrine_Record
              'type' => 'integer',
              'length' => 4,
              'fixed' => false,
-             'unsigned' => false,
+             'unsigned' => true,
              'primary' => false,
+             'default' => '0',
              'notnull' => true,
              'autoincrement' => false,
              ));
@@ -81,7 +82,7 @@ abstract class BaseEntradas extends Doctrine_Record
              'type' => 'float',
              'length' => 10,
              'fixed' => false,
-             'unsigned' => false,
+             'unsigned' => true,
              'primary' => false,
              'notnull' => false,
              'autoincrement' => false,

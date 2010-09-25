@@ -22,6 +22,13 @@
 		$queryString .= '&nome_fantasia=' . $nome_fantasia;
 		$sqlString .= ' and i.nome_fantasia like "%'.$nome_fantasia.'%"';
 	}
+	
+	$regional_id = (int) get('regional_id');
+	if(!empty($regional_id))
+	{
+		$queryString .= '&regional_id=' . $regional_id;
+		$sqlString .= ' and i.regional_id = '.$regional_id;
+	}
 	#
 	
 	# chama a action index
@@ -97,26 +104,12 @@
 							</div>
 			
 							<div class="bloco-ft">
-								<label>Região</label>
-								<select name="regiao_id" id="regiao_id" class="text-edit listbox">
-									<option value="0">selecione a região</option>
-								</select>
-							</div>
-							
-							<div class="bloco-ft">
-								<label>Estado</label>
-								<select name="estado_id" id="estado_id" class="text-edit listbox">
-									<option value="0">selecione o estado</option>
-								</select>
-							</div>
-							
-							<div class="bloco-ft">
-								<label>Cidade</label>
-								<select name="cidade_id" id="cidade_id" class="text-edit listbox">
-									<option value="0">selecione a cidade</option>
-								</select>
-							</div>
-	
+								<label>Regional</label>							
+								<?=listBox('text-edit listbox', 'regional_id', 'Regionais', 
+												 'nome', $regional_id, 'status = 1', 
+												 'nome asc');
+    							?>
+							</div>	
 							
 							<div class="box-botao">
 								<input type="submit" name="enviar-filtro" value="Enviar" class="botao-filtro" />
@@ -132,12 +125,12 @@
 							
 							<!-- titulo dos campos listados -->
 							<tr class="menu-rg">
-								<th align="left" width="550">Nome Fantasia / Cidade / Estado</th>
+								<th align="left">Nome Fantasia / Cidade / Estado</th>
 								<th width="90">Fundação</th>
-								<th width="60">Status</th>
+								<!--<th width="60">Status</th>-->
 								
 								<!-- -->
-								<th class="no-borda-right" colspan="2">Ações</th>
+								<th class="no-borda-right">Ações</th>
 							</tr>
 							
 							<!-- campos a serem listados > bg > active-tr -->
@@ -161,18 +154,29 @@
 							<tr class="listar-rg <?=$bg?>">
 								
 								<td align="left">
-									<strong><a href="<?=URL?>igrejas/editar/?id=<?=$igrejas[$i]['id']?>" title="<?=$igrejas[$i]['nome_fantasia']?>"><?=$igrejas[$i]['nome_fantasia']?></a></strong> - Teresina / PI
+									<strong><a href="<?=URL?>igrejas/editar/?id=<?=$igrejas[$i]['id']?>" title="<?=$igrejas[$i]['nome_fantasia']?>"><?=$igrejas[$i]['nome_fantasia']?></a></strong>
+									<?
+										if(!empty($igrejas[$i]['cidade']))
+										{
+											echo '<br>';
+											echo $igrejas[$i]['cidade'];
+											
+											if(!empty($igrejas[$i]['estado']))
+												echo ' / ' . $igrejas[$i]['estado'];
+										}										
+									?>
 								</td>
 								
-								<td><?=$igrejas[$i]['data_fundacao']?></td>
+								<td><?=formataData($igrejas[$i]['data_fundacao'])?></td>
 								
 								<!-- status -->
-								<td id="status-<?=$igrejas[$i]['id']?>"><?=$status?></td>
+								<!--<td id="status-<?=$igrejas[$i]['id']?>"><?=$status?></td>-->
 								
 								<!-- -->
-								<td class="no-borda-right" align="right"><a href="<?=URL?>igrejas/visualizar/?id=<?=$igrejas[$i]['id']?>" title="Visualizar Registro"><img src="<?=IMG_URL?>visualizar.png" /></td>
-								<td class="no-borda-right"><a href="<?=URL?>igrejas/excluir/?id=<?=$igrejas[$i]['id']?>" title="Remover Registro"><img src="<?=IMG_URL?>remover.png" /></td>
-							
+								<td width="65" class="no-borda-right">
+									<a class="no-borda" href="<?=URL?>igrejas/visualizar/?id=<?=$igrejas[$i]['id']?>" title="Visualizar Registro"><img src="<?=IMG_URL?>visualizar.png" />&nbsp;
+									<a href="<?=URL?>igrejas/excluir/?id=<?=$igrejas[$i]['id']?>" title="Remover Registro"><img src="<?=IMG_URL?>remover.png" />								
+								</td>						
 							</tr>
 							<?
 									$x++;

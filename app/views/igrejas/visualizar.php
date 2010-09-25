@@ -55,7 +55,6 @@
 	<script type="text/javascript" src="<?=JS_URL?>superfish.js"></script>
 	
 </head>
-
 <body>
 	
     <div id="content">

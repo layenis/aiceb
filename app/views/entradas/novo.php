@@ -1,5 +1,4 @@
-<?php
-  
+<?php  
 	session_start();
   
 	require_once(CONTROLLERS . 'entradasController.php');
@@ -8,15 +7,14 @@
 	$entradasController = new EntradasController();
 	$entradas = new Entradas();	
 	
-	$igrejasController = new IgrejasController();
-	$igrejas = new Igrejas();
-	$igrejas = $igrejasController->buscaPorRegional();
-	
 	#inicializar erro
 	$erro = array();
 	
 	if(isset($_POST['action']))
 	{
+		# tratar alguns dados
+		$entradas->data_entrada = formataDataBanco($entradas->data_entrada);
+		
 		# recuperar os campos
 		$entradas = $entradas->recuperarCampos($entradas, $_POST, 'novo');
 
@@ -25,9 +23,6 @@
 
 		if (count($erro) == 0)
 		{
-			#validar alguns campos
-			$entradas->data_entrada = formataDataBanco($entradas->data_entrada);
-  
 			$entradas->created_at = date('Y-m-d H:i:s');
 						  
 			$entradasController->salvar($entradas);

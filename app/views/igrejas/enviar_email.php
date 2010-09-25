@@ -7,36 +7,43 @@
 	$igrejasController = new IgrejasController();
 	$igrejas = new Igrejas();
 	
-	$regionaisController = new RegionaisController();
-	$regionais = new Regionais();
-	
-	if(isset($_POST['action']))
+	if(($id = (int) $_GET['id']) != 0)
 	{
-		if(($id = (int) $_GET['id']) != 0)
+		# pesquisa pelo id
+		$igrejas = $igrejasController->buscaPorId($id);
+		
+		if($igrejas == false)
 		{
-			# pesquisa pelo id
-			$igrejas = $igrejasController->buscaPorId($id);
+			setMensagem("Registro inválido");
+			header('Location: ' . URL . 'igrejas/index'); 
+			exit;
+		}
+		
+		# validar alguns campos
+		$igrejas->data_fundacao = formataData($igrejas->data_fundacao);
+	}
+	else
+	{
+		setMensagem("Registro inválido");
+		header('Location: ' . URL . 'igrejas/index'); 
+		exit;
+	}
+
+	if(post('action') == 'enviar_email')
+	{	
+		$email = post('email');
+		
+		if(!empty($email))
+		{
+			# trata para enviar para varios emails
+			$email = str_replace(',', ';', $email);
 			
-			# pesquisa pelo id o nome da regional
-			$regionais = $regionaisController->buscaPorId($igrejas->regional_id);
-					
-			# validar alguns campos
-			$igrejas->data_fundacao = formataData($igrejas->data_fundacao);
-			
-			if($igrejas == false)
-			{
-				setMensagem("Registro inválido");
-				header('Location: ' . URL . 'igrejas/index'); 
-				exit;
-			}		
-			
-			#### Montando o e-mail a ser enviado
-			$email = $_POST['email'];
+			$regional = select('Regionais', 'nome', $igrejas->regional_id);
 			
 			# CABEÇALHO DO E-MAIL
-			$headers = "MIME-Version: 1.0\n";
+			$headers  = "MIME-Version: 1.0\n";
 			$headers .= "Content-type: text/HTML; charset=iso-8859-1\n";
-			$headers .= "From: ".$email."\n";
+			$headers .= "From: Fabrício Souza <compifab@hotmail.com>\n";
 
 			# MENSAGEM PERSONALIZADA
 			$mensagem = '
@@ -47,7 +54,7 @@
 					<table>
 						<tr>
 							<td><b> Regional: </b></td>
-							<td>' . $regionais->nome . '</td>
+							<td>' . $regional . '</td>
 						</tr>
 						<tr>
 							<td><b> Código: </b></td>
@@ -83,11 +90,11 @@
 						</tr>
 						<tr>
 							<td><b> Cidade: </b></td>
-							<td>' . $igrejas->cidade_id . '</td>
+							<td>' . $igrejas->cidade . '</td>
 						</tr>
 						<tr>
 							<td><b> Estado: </b></td>
-							<td>' . $igrejas->estado_id . '</td>
+							<td>' . $igrejas->estado . '</td>
 						</tr>
 						<tr>
 							<td><b> Data da fundação: </b></td>
@@ -110,18 +117,32 @@
 				setMensagem('Não foi possível enviar seu email!');
 			}
 			
-			header('Location: ' . URL . 'igrejas/index'); 
-			exit;
-		}
-		else
-		{
-			setMensagem("Registro inválido");
-			header('Location: ' . URL . 'igrejas/index'); 
-			exit;
+			header('Location: ' . URL . 'igrejas/index'); exit;
 		}	
-	}	
+	}
+	
+	# obter todos os emails cadastrados para sugestão
+	$emails_obreiros = new Obreiros();
+	$q = Doctrine_Query::Create()
+			->select('nome, email')
+			->from('Obreiros')
+			->orderBy('nome asc');
+	$emails_obreiros = $q->execute();	
+	
+	$array_emails = '[';
+	foreach($emails_obreiros as $email_obreiro)
+	{		
+		$array_emails .= "'".$email_obreiro->email."', ";
+	}
+	
+	$array_emails = substr($array_emails, 0, -2);
+	$array_emails .= ']';
+	
+	# ativar a aba
+	$encurtar_tamanho = 'encurtar_tamanho';
+	$othersAction = 'active';
+	$labelAction = 'Enviar Email';
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -140,9 +161,22 @@
 	<script type="text/javascript" src="<?=JS_URL?>superfish.js"></script>
 	<script src="<?=JS_URL?>jquery.maskedinput-1.2.2.min.js" type="text/javascript"></script>
 	
-	<script type="text/javascript" src="<?=JS_URL?>validacoes.js"></script>
+	<link rel="stylesheet" type="text/css" href="<?=PLUGIN_URL?>autocomplete/jquery.autocomplete.css" />
+	<script type='text/javascript' src='<?=PLUGIN_URL?>autocomplete/jquery.autocomplete.js'></script>
+	
+	<script>			
+		$(document).ready(function()
+		{	
+			var emails = <?=$array_emails?>;
+			
+			$("#email").autocomplete(emails, {
+				multiple: true,
+				mustMatch: false,
+				autoFill: true
+			});
+		});
+	</script>
 </head>
-
 <body>
 	
     <div id="content">
@@ -154,8 +188,14 @@
 			<? include(VIEWS . 'igrejas' . DS . 'sub-menu.php'); ?>
 			
 			<div class="meio-conteudo-borda">
+
+
 				<div class="meio-conteudo">
-	
+
+					<div class="print-vs">
+						<span><a href="<?=URL . 'igrejas/visualizar/?id=' . $id?>">Voltar</a></span>
+					</div>
+					
 					<div class="conteudo-rg">
 						<form name="" method="post" action="">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tabela-vs">
@@ -166,24 +206,120 @@
 								
 								<tr class="dados-vs">
 									<td class="label-vs"><br>Digite o e-mail:&nbsp;</td>
-									<td><br><input class="text-edit" type="text" name="email" id="email" size="80" maxlength="100" />**</td>
+									<td><br><textarea class="text-edit" name="email" id="email" rows="2" cols="82"><?=$email?></textarea></td>
 								</tr>
 								
 								<tr class="dados-vs">
 									<td colspan="2" align="center">
-										<input type="submit" name="enviar-filtro" value="Enviar" class="botao-filtro" />
-										<input type="button" name="enviar-filtro" value="Voltar" class="botao-filtro" />
+										<input style="float: right; margin-right: 30px;" type="submit" name="enviar-filtro" value="Enviar" class="botao-filtro" />
 									</td>
 								</tr>
 								
-								<input type="hidden" name="action" value="salvar" />
+								<tr>
+									<td class="dados-vs">&nbsp;</td>									
+									<td class="dados-vs"> * Para enviar emails basta digitar o email do destinatário.<br /> ** Para enviar vários emails, bastar digitar o email seguido de virgula. Exemplo: jogao@hotmail.com, jose@hotmail.com<br /> *** O sistema irá sugerir email que se encontram cadastrado.</td>
+								</tr>
 								
-								** Para enviar para mais de um destinatário, separe os e-mails por ponto-e-vírgula (;)
-								<br>
-								Ex.: joao@gmail.com; pedro@gmail.com
-												
+								<tr>
+									<td colspan="2"><input type="hidden" name="action" value="enviar_email" /></td>
+								</tr>
+								
+								<tr>
+									<td colspan="2" class="dados-vs">&nbsp;</td>
+								</tr>
 							</table>
 						</form>
+						
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tabela-vs">
+							
+							<tr class="marcador-vs">
+								<td colspan="2">Dados Pessoais</td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Código:&nbsp;</td>
+								<td><?=$igrejas->id?></td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Regional:&nbsp;</td>
+								<td><?=select('Regionais', 'nome', $igrejas->regional_id)?></td>
+							</tr>	
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Estado:&nbsp;</td>
+								<td>Piauí</td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Cidade:&nbsp;</td>
+								<td>Teresina</td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Nome Fantasia:&nbsp;</td>
+								<td><?=stripslashes($igrejas->nome_fantasia)?></td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Razão Social:&nbsp;</td>
+								<td><?=stripslashes($igrejas->razao_social)?></td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">CNPJ:&nbsp;</td>
+								<td><?=$igrejas->cnpj?></td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">História:&nbsp;</td>
+								<td><?=stripslashes($igrejas->historia)?></td>
+							</tr>
+							
+							<tr class="marcador-vs">
+								<td colspan="2">Informações Residenciais</td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Endereço:&nbsp;</td>
+								<td><?=stripslashes($igrejas->endereco)?></td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Número:&nbsp;</td>
+								<td><?=$igrejas->numero?></td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Complemento:&nbsp;</td>
+								<td><?=stripslashes($igrejas->complemento)?></td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Bairro:&nbsp;</td>
+								<td><?=stripslashes($igrejas->bairro)?></td>
+							</tr>	
+							
+							<tr class="dados-vs">
+								<td class="label-vs">CEP:&nbsp;</td>
+								<td><?=$igrejas->cep?></td>
+							</tr>		
+
+							<tr class="dados-vs">
+								<td class="label-vs">Criado:&nbsp;</td>
+								<td><?=formataData($igrejas->created_at, 'datetime', 'datetime')?></td>
+							</tr>
+							
+							<tr class="dados-vs">
+								<td class="label-vs">Modificado:&nbsp;</td>
+								<td><?=formataData($igrejas->modified_at, 'datetime', 'datetime')?></td>
+							</tr>			
+
+							<tr class="dados-vs">
+								<td class="label-vs">Status:&nbsp;</td>
+								<td><? if($igrejas->status == 1) echo 'Ativo'; else echo 'Desativo'; ?></td>
+							</tr>							
+						</table>
 					</div>
 					
 				</div>

@@ -7,36 +7,20 @@
 <tr class="dados-vs">
 	<td class="label-vs">Selecione a igreja:&nbsp;</td>
 	<td>
-		<select name="igreja_id" id="igreja_id">
-			<option>Selecione a igreja...</option>
-		<?
-			foreach ($igrejas as $igreja) 
-			{ 
-				if ($igreja->id == $entradas->igreja_id)
-				{
-				
-		?>
-					<option value="<?=$igreja->id?>" selected> <?=$igreja->codigo . ' - ' . $igreja->nome_fantasia;?></option>
-		<? 
-				}
-				else
-				{
-		?>
-					<option value="<?=$igreja->id?>"><?=$igreja->codigo . ' - ' . $igreja->nome_fantasia;?></option>
-		<?
-				}
-			}
-		?>
-		</select>
+	<?
+		$_class = 'text-edit listbox';
+		if(in_array('igreja_id_erro', $erro)) $_class .= ' text-erro';
+		
+		echo listBox($_class, 'igreja_id', 'Igrejas', 'nome_fantasia', $entradas->igreja_id, 'status = 1', 'nome_fantasia asc');
+	?>
 	</td>
 </tr>
 
 <tr class="dados-vs">
 	<td class="label-vs">Mês do depósito:&nbsp;</td>
 	<td>
-	
 		<select name="mes_deposito" id="mes_deposito" class="text-edit  <? if(in_array('mes_deposito_erro', $erro)) echo 'text-erro'; ?> listbox">
-			<option>Selecione o mês...</option>
+			<option value="">Selecione o mês...</option>
 			<?
 				$array_mes = array('Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 
 								   'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
@@ -46,7 +30,7 @@
 					if ($entradas->mes_deposito == $row)
 					{
 			?>
-					<option value="<?=$row?>" selected><?=$row?></option>
+					<option value="<?=$row?>" selected="selected"><?=$row?></option>
 			<?
 					}
 					else
@@ -64,7 +48,7 @@
 <tr class="dados-vs">
 	<td class="label-vs">Data:&nbsp;</td>
 	<td>
-		<input class="text-edit  <? if(in_array('data_entrada_erro', $erro)) echo 'text-erro'; ?>" type="text" name="data_entrada" id="data_entrada" value="<?=$entradas->data_entrada?>" size="10" maxlength="10" />
+		<input class="text-edit  <? if(in_array('data_entrada_erro', $erro)) echo 'text-erro'; ?>" type="text" name="data_entrada" id="data_entrada" value="<?=formataData($entradas->data_entrada, 'date', 'date')?>" size="10" maxlength="10" />
 	</td>
 </tr>
 

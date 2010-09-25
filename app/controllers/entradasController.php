@@ -32,40 +32,24 @@
 				->where('1=1 ' . $sqlString . $criterio_permissao)
 				->orderby('e.data_entrada asc');			
 			
-			# criando o objeto pager
-			$pager = new Doctrine_Pager($q, $currentPage, $resultsPerPage);
-			
-			# executa o pager
-			$pager->execute();
-
-			# dados da paginação
-			$paginacao = array('pagina_atual' => $pager->getPage(),
-							   'primeiro_indice' => $pager->getFirstIndice(),
-							   'ultimo_indice' => $pager->getLastIndice(),
-							   'total_resultados' => $pager->getNumResults(),
-							   'primeiro' => URL . 'entradas/index/?pg=' . $pager->getFirstPage(),
-							   'anterior' => URL . 'entradas/index/?pg=' . $pager->getPreviousPage(),
-							   'proximo' => URL . 'entradas/index/?pg=' . $pager->getNextPage(),
-							   'ultimo' => URL . 'entradas/index/?pg=' . $pager->getLastPage());
-			
-			return array('entradas' => $pager->execute()->toArray(),
-						 'paginacao' => $paginacao);
+			return $this->paginacao($q, 'entradas', $currentPage, $resultsPerPage);
 		}
 		
-		  function salvar($entradas)
-		  {
+		function salvar($entradas)
+		{	
+			$entradas->save();
+			
 			try
-				{
-					$entradas->save();
-					setMensagem("Registro gravado com sucesso!");
-					header('Location: ' . URL . 'entradas/index'); exit;
-				}
-				catch(Doctrine_Connection_Exception $e) 
-				{
-					echo 'Código: ' . $e->getPortableCode();
-					echo '<br>Mensagem: ' . $e->getPortableMessage();
-				}
-		  }
+			{
+				setMensagem("Registro gravado com sucesso!");
+				header('Location: ' . URL . 'entradas/index'); exit;
+			}
+			catch(Doctrine_Connection_Exception $e) 
+			{
+				echo 'Código: ' . $e->getPortableCode();
+				echo '<br>Mensagem: ' . $e->getPortableMessage();
+			}
+		}
 
 		  function buscaPorId($id)
 		  {

@@ -28,7 +28,7 @@ abstract class BaseAgendasGerais extends Doctrine_Record
              'type' => 'integer',
              'length' => 4,
              'fixed' => false,
-             'unsigned' => false,
+             'unsigned' => true,
              'primary' => true,
              'autoincrement' => true,
              ));
@@ -36,8 +36,9 @@ abstract class BaseAgendasGerais extends Doctrine_Record
              'type' => 'integer',
              'length' => 4,
              'fixed' => false,
-             'unsigned' => false,
+             'unsigned' => true,
              'primary' => false,
+             'default' => '0',
              'notnull' => true,
              'autoincrement' => false,
              ));

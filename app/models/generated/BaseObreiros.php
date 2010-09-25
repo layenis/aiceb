@@ -63,7 +63,7 @@ abstract class BaseObreiros extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('cpf', 'string', 20, array(
@@ -72,7 +72,7 @@ abstract class BaseObreiros extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('rg', 'string', 20, array(
@@ -98,7 +98,7 @@ abstract class BaseObreiros extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('pai', 'string', 255, array(
@@ -160,7 +160,7 @@ abstract class BaseObreiros extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('complemento', 'string', 100, array(
@@ -187,7 +187,7 @@ abstract class BaseObreiros extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('cidade_id', 'integer', 4, array(
@@ -196,7 +196,7 @@ abstract class BaseObreiros extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('estado_id', 'integer', 4, array(
@@ -205,7 +205,7 @@ abstract class BaseObreiros extends Doctrine_Record
              'fixed' => false,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
              'autoincrement' => false,
              ));
         $this->hasColumn('telefone', 'string', 20, array(

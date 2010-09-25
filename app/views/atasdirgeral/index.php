@@ -76,32 +76,23 @@
 							}
 						?>
 						
-			   	<form name="filtros" method="get" action="<?=URL . 'atasdirgeral/index/'?>">
-						
+						<form name="filtros" method="get" action="<?=URL . 'atasdirgeral/index/'?>">
+							
 							<div class="bloco-ft">
 								<label>Título:</label>
 								<input class="text-edit" type="text" name="titulo" id="titulo" value="<?=$titulo?>" size="40" maxlength="40" />
 							</div>
-		            
-            <div class="box-botao">
+
+							<div class="box-botao">
 								<input type="submit" name="enviar-filtro" value="Enviar" class="botao-filtro" />
-						</div>
-					</form>
-				</div>
+							</div>
+						</form>
+					</div>
 				
-				<div class="conteudo-pg">
-						<span class="info-pg">Listando <?=$paginacao['primeiro_indice']?> até <?=$paginacao['ultimo_indice']?> de <?=$paginacao['total_resultados']?> registros</span>
-						
-						<div class="paginacao">
-							<div class="botoes-pg radios-left"><a href="<?=$paginacao['primeiro']?>" title="Primeiro">Primeiro</a></div>
-							<div class="botoes-pg"><a href="<?=$paginacao['anterior']?>" title="Anterior">Anterior</a></div>
-							<div class="botoes-pg"><?=$paginacao['pagina_atual']?></div>
-							<div class="botoes-pg"><a href="<?=$paginacao['proximo']?>" title="Próximo">Próximo</a></div>
-							<div class="botoes-pg radios-right"><a href="<?=$paginacao['ultimo']?>" title="Último">Último</a></div>
-						</div>
-			 </div>
+					<!-- paginacao -->
+					<? include(LAYOUTS . 'paginacao.php'); ?>
 			 
-			 	<div class="conteudo-rg">					
+					<div class="conteudo-rg">					
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tabela-rg">
 							
 							<!-- titulo dos campos listados -->

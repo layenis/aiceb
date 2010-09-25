@@ -15,6 +15,11 @@ img
 	border: 0px;
 }
 
+.no-borda
+{
+	text-decoration: none !important;
+}
+
 body
 {
 	margin: 0px;

@@ -76,11 +76,7 @@
 
 					<div class="print-vs">
 						<span><a href="<?=URL . 'entradas/imprimir/?id=' . $id?>">Imprimir</a></span>
-<<<<<<< HEAD
-						<span>Enviar por Email</span>
-=======
 						<span><a href="<?=URL . 'entradas/enviar_email/?id=' . $id?>">Enviar por Email</a></span>
->>>>>>> layenis/master
 					</div>
 					
 					<div class="conteudo-rg">

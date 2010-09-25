@@ -100,7 +100,7 @@
 							<tr class="menu-rg">
 								<th align="center" width="100">Data</th>
 								<th align="left" width="300">Igreja</th>
-								<th align="center" width="100">Mês do depósito</th>
+								<th align="center" width="100">Mês depósito</th>
 								<th width="100">Valor</th>
 								
 								<!-- -->
@@ -126,11 +126,7 @@
 								<td><?=$entradas[$i]['valor']?></td>								
 								
 								<!-- -->
-<<<<<<< HEAD
-								<td class="no-borda-right" align="right"><a href="<?=URL?>entradas/recibo/?id=<?=$entradas[$i]['id']?>" title="Emitir Recibo"><img src="<?=IMG_URL?>remover.png" /></td>
-=======
 								<td class="no-borda-right" align="right"><a href="<?=URL?>entradas/recibo/?id=<?=$entradas[$i]['id']?>" title="Emitir Recibo"><img src="<?=IMG_URL?>recibo.png" /></td>
->>>>>>> layenis/master
 								<td class="no-borda-right"><a href="<?=URL?>entradas/visualizar/?id=<?=$entradas[$i]['id']?>" title="Visualizar Registro"><img src="<?=IMG_URL?>visualizar.png" /></td>
 								<td class="no-borda-right"><a href="<?=URL?>entradas/excluir/?id=<?=$entradas[$i]['id']?>" title="Remover Registro"><img src="<?=IMG_URL?>remover.png" /></td>
 							
@@ -145,7 +141,7 @@
 							?>
 							<tr class="listar-rg">
 								
-								<td align="left" colspan="5" style="font-size: 16px;"><strong>Nenhum registro encontrado.</strong></td>
+								<td align="left" colspan="8" style="font-size: 16px;"><strong>Nenhum registro encontrado.</strong></td>
 							
 							</tr>
 							<?

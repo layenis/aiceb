@@ -41,11 +41,7 @@
 <html>
 
 <head>
-<<<<<<< HEAD
-  <title> Ata
-=======
   <title> Entrada
->>>>>>> layenis/master
 </head>
     
 <body> 

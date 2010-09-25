@@ -109,16 +109,9 @@
 							<tr class="menu-rg">
 							<th align="left" width="100">Código</th>
 							<th align="left" width="500">Nome</th>
-<<<<<<< HEAD
-								<th width="100">Status</th>
-								
-								<!-- -->
-								<th class="no-borda-right" colspan="2">Ações</th>
-=======
 							<th width="100">Status</th>
 								
 							<th class="no-borda-right" colspan="2">Ações</th>
->>>>>>> layenis/master
 							</tr>
 							
 							<!-- campos a serem listados > bg > active-tr -->
@@ -151,13 +144,8 @@
 								<td id="status-<?=$regionais[$i]['id']?>"><?=$status?></td>
 								
 								<!-- -->
-<<<<<<< HEAD
-								<!--<td class="no-borda-right" align="right"><a href="visualizar.html" title="Visualizar Registro"><img src="<?=IMG_URL?>visualizar.png" /></td>-->
-								<td class="no-borda-right"><a href="<?=URL?>regionais/excluir/?id=<?=$regionais[$i]['id']?>" title="Remover Registro"><img src="<?=IMG_URL?>remover.png" /></td>
-=======
 								<td class="no-borda-right"><a href="<?=URL?>membrosregionais/index" title="Editar Membros"><img src="<?=IMG_URL?>membros.png" /></td>
 								<!--<td class="no-borda-right"><a href="<?=URL?>regionais/excluir/?id=<?=$regionais[$i]['id']?>" title="Remover Registro"><img src="<?=IMG_URL?>remover.png" /></td>-->
->>>>>>> layenis/master
 							
 							</tr>
 							<?

@@ -56,15 +56,15 @@ class Obreiros extends BaseObreiros
         $erro = array();
         
         if (empty($obreiros->nome))           $erro[] = 'nome_erro'; 
-        if (empty($obreiros->cpf))            $erro[] = 'cpf_erro';
-        if (empty($obreiros->rg))             $erro[] = 'rg_erro';
-        if (empty($obreiros->orgao_emissor))  $erro[] = 'orgao_emissor_erro';
-        if (empty($obreiros->data_nasc))      $erro[] = 'data_nasc_erro';
-        if (empty($obreiros->endereco))       $erro[] = 'endereco_erro';
-        if (empty($obreiros->bairro))         $erro[] = 'bairro_erro';
-        if (empty($obreiros->cep))            $erro[] = 'cep_erro';
-        if (empty($obreiros->cidade_id))      $erro[] = 'cidade_id_erro';
-        if (empty($obreiros->estado_id))      $erro[] = 'estado_id_erro';
+        #if (empty($obreiros->cpf))            $erro[] = 'cpf_erro';
+        #if (empty($obreiros->rg))             $erro[] = 'rg_erro';
+        #if (empty($obreiros->orgao_emissor))  $erro[] = 'orgao_emissor_erro';
+        #if (empty($obreiros->data_nasc))      $erro[] = 'data_nasc_erro';
+        #if (empty($obreiros->endereco))       $erro[] = 'endereco_erro';
+        #if (empty($obreiros->bairro))         $erro[] = 'bairro_erro';
+        #if (empty($obreiros->cep))            $erro[] = 'cep_erro';
+        #if (empty($obreiros->cidade_id))      $erro[] = 'cidade_id_erro';
+        #if (empty($obreiros->estado_id))      $erro[] = 'estado_id_erro';
         if (empty($obreiros->email))          $erro[] = 'email_erro';
       
         return $erro;

@@ -17,7 +17,7 @@
 				$currentPage = $pg;
 			
 			# resultados por página
-			$resultsPerPage = 3;
+			$resultsPerPage = 20;
 			
 			## PERMISSOES
 			if(!empty($_SESSION['USUARIO_REGIONAL_ID']))
@@ -61,9 +61,9 @@
 		}
 		
 		function salvar($igrejas)
-		{	
+		{				
 			try
-			{
+			{					
 				$igrejas->save();
 				
 				setMensagem("Registro gravado com sucesso!");

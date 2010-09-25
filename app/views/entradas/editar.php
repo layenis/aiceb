@@ -26,9 +26,6 @@
 		
 		if (count($erro) == 0)
 		{
-			#validar alguns campos
-			$entradas->data_entrada = formataDataBanco($entradas->data_entrada);
-
 			$entradas->modified_at = date('Y-m-d H:i:s');
 
 			# salvar
@@ -51,9 +48,6 @@
 			header('Location: ' . URL . 'entradas/index'); 
 			exit;
 		}
-		
-		#Formata campos
-		$entradas->data_entrada = formataData($entradas->data_entrada);
 	}
 	else
 	{

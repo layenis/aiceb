@@ -28,14 +28,11 @@
 		exit;
 	}
 	
-<<<<<<< HEAD
-=======
 	# ativar a aba
 	$encurtar_tamanho = 'encurtar_tamanho';
 	$othersAction = 'active';
 	$labelAction = 'Visualizar';
 	
->>>>>>> layenis/master
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -73,11 +70,7 @@
 
 					<div class="print-vs">
 						<span><a href="<?=URL . 'atasdirgeral/imprimir/?id=' . $id?>">Imprimir</a></span>
-<<<<<<< HEAD
-						<span>Enviar por Email</span>
-=======
 						<span><a href="<?=URL . 'atasdirgeral/enviar_email/?id=' . $id?>">Enviar por Email</a></span>
->>>>>>> layenis/master
 					</div>
 					
 					<div class="conteudo-rg">

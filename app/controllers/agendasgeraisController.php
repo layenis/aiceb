@@ -25,24 +25,7 @@ class AgendasGeraisController extends Controller
 			->where('1=1 ' . $sqlString)
 			->orderby('a.data_agenda asc');
 
-		# criando o objeto pager
-		$pager = new Doctrine_Pager($q, $currentPage, $resultsPerPage);
-
-		# executa o pager
-		$pager->execute();
-
-		# dados da paginação
-		$paginacao = array('pagina_atual' => $pager->getPage(),
-						   'primeiro_indice' => $pager->getFirstIndice(),
-						   'ultimo_indice' => $pager->getLastIndice(),
-						   'total_resultados' => $pager->getNumResults(),
-						   'primeiro' => URL . 'agendasgerais/index/?pg=' . $pager->getFirstPage(),
-						   'anterior' => URL . 'agendasgerais/index/?pg=' . $pager->getPreviousPage(),
-						   'proximo' => URL . 'agendasgerais/index/?pg=' . $pager->getNextPage(),
-						   'ultimo' => URL . 'agendasgerais/index/?pg=' . $pager->getLastPage());
-		
-		return array('agendasgerais' => $pager->execute()->toArray(),
-					 'paginacao' => $paginacao);
+		return $this->paginacao($q, 'agendasgerais', $currentPage, $resultsPerPage);
 	}
 	
 	function salvar($agendasgerais)

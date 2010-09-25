@@ -7,29 +7,18 @@
 <tr class="dados-vs">
 	<td class="label-vs">Regional:&nbsp;</td>
 	<td>
-		<select name="regiao_id" id="regiao_id" class="text-edit  <? if(in_array('regiao_id_erro', $erro)) echo 'text-erro'; ?> listbox">
-			<option value="0">selecione a região</option>
-		</select>
+		<?php 
+			$_class = 'text-edit';
+			if(in_array('regional_id_erro', $erro)) 
+				$_class .= ' text-erro';
+
+			echo listBox($_class, 'regional_id', 'Regionais', 
+						 'nome', $igrejas->regional_id, 'status = 1', 
+						 'nome asc');
+		?>
+
 	</td>
 </tr>	
-
-<tr class="dados-vs">
-	<td class="label-vs">Estado:&nbsp;</td>
-	<td>
-		<select name="estado_id" id="estado_id" class="text-edit  <? if(in_array('estado_id_erro', $erro)) echo 'text-erro'; ?> listbox">
-			<option value="0">selecione o estado</option>
-		</select>
-	</td>
-</tr>	
-
-<tr class="dados-vs">
-	<td class="label-vs">Cidade:&nbsp;</td>
-	<td>
-		<select name="cidade_id" id="cidade_id" class="text-edit  <? if(in_array('cidade_id_erro', $erro)) echo 'text-erro'; ?> listbox">
-			<option value="0">selecione a cidade</option>
-		</select>
-	</td>
-</tr>
 
 <tr class="dados-vs">
 	<td class="label-vs">Código da Igreja:&nbsp;</td>
@@ -83,7 +72,16 @@
 </tr>
 
 <tr class="dados-vs">
-	<td class="label-vs">Endereço:&nbsp;</td>
+	<td class="label-vs"><label for="cep">Cep:&nbsp;</label></td>
+	<td>
+		<input class="text-edit  <? if(in_array('cep_erro', $erro)) echo 'text-erro'; ?>" type="text" name="cep" id="cep" value="<?=$igrejas->cep?>" size="16" maxlength="9" />
+		<div class="contador" id="count-cep"></div>
+		<button class="botao-filtro" style="margin-left: 10px; padding: 2px 10px;">Pesquisar Cep</button>
+	</td>
+</tr>
+
+<tr class="dados-vs">
+	<td class="label-vs">Rua:&nbsp;</td>
 	<td>
 		<input class="text-edit  <? if(in_array('endereco_erro', $erro)) echo 'text-erro'; ?>" type="text" name="endereco" id="endereco" value="<?=$igrejas->endereco?>" size="82" maxlength="120" />
 		<div class="contador" id="count-endereco"></div>
@@ -115,15 +113,22 @@
 </tr>
 
 <tr class="dados-vs">
-	<td class="label-vs">Cep:&nbsp;</td>
-	<td>
-		<input class="text-edit  <? if(in_array('cep_erro', $erro)) echo 'text-erro'; ?>" type="text" name="cep" id="cep" value="<?=$igrejas->cep?>" size="16" maxlength="9" />
-		<div class="contador" id="count-cep"></div>
+	<td class="label-vs">Cidade:&nbsp;</td>
+	<td>		
+		<input class="text-edit  <? if(in_array('cidade_erro', $erro)) echo 'text-erro'; ?>" type="text" name="cidade" id="cidade" value="<?=$igrejas->cidade?>" size="50" maxlength="80" />
+		<div class="contador" id="count-cidade"></div>
 	</td>
 </tr>
 
-					
+<tr class="dados-vs">
+	<td class="label-vs">Estado:&nbsp;</td>
+	<td>
+		<input class="text-edit  <? if(in_array('estado_erro', $erro)) echo 'text-erro'; ?>" type="text" name="estado" id="estado" value="<?=$igrejas->estado?>" size="4" maxlength="2" />
+		<div class="contador" id="count-estado"></div>
+	</td>
+</tr>						
 
+<!--
 <tr class="marcador-vs">
 	<td colspan="2">Outros</td>
 </tr>
@@ -134,10 +139,11 @@
 		<input name="status" id="status" type="checkbox" value="1" <? if($igrejas->status == 1) echo 'checked="checked"'; ?> />
 	</td>
 </tr>	
+-->
 
 <tr class="dados-vs">
 	<td colspan="2" align="center">
-		<input type="submit" name="enviar-filtro" value="Enviar" class="botao-filtro" />
+		<input onclick="this.form.submit();" type="submit" name="enviar-filtro" value="Enviar" class="botao-filtro" />
 		<input onclick="javascript: history.back();" type="button" name="enviar-filtro" value="Voltar" class="botao-filtro" />
 	</td>
 </tr>

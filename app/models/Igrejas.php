@@ -18,8 +18,6 @@ class Igrejas extends BaseIgrejas
 			$igrejas->id = $post['id'];
 		
 		$igrejas->regional_id = $post['regional_id'];
-		$igrejas->estado_id = $post['estado_id'];
-		$igrejas->cidade_id = $post['cidade_id'];
 		$igrejas->codigo = $post['codigo'];
 		$igrejas->nome_fantasia = $post['nome_fantasia'];
 		$igrejas->razao_social = $post['razao_social'];
@@ -31,6 +29,8 @@ class Igrejas extends BaseIgrejas
 		$igrejas->complemento = $post['complemento'];
 		$igrejas->bairro = $post['bairro'];
 		$igrejas->cep = $post['cep'];
+		$igrejas->estado = $post['estado'];
+		$igrejas->cidade = $post['cidade'];
 		$igrejas->status = $post['status'];
 		
 		return $igrejas;
@@ -41,19 +41,19 @@ class Igrejas extends BaseIgrejas
 		$erro = array();
 		
 		if(empty($igrejas->regional_id)) $erro[] = 'regional_id_erro';
-		# if(empty($igrejas->estado_id)) $erro[] = 'estado_id_erro';
-		# if(empty($igrejas->cidade_id)) $erro[] = 'cidade_id_erro';
 		if(empty($igrejas->nome_fantasia)) $erro[] = 'nome_fantasia_erro';
 		if(empty($igrejas->codigo)) $erro[] = 'codigo_erro';		
-		if(empty($igrejas->razao_social)) $erro[] = 'razao_social_erro';
-		if(empty($igrejas->cnpj)) $erro[] = 'cnpj_erro';
-		if(empty($igrejas->historia)) $erro[] = 'historia_erro';
-		if(empty($igrejas->data_fundacao)) $erro[] = 'data_fundacao_erro';
-		if(empty($igrejas->endereco)) $erro[] = 'endereco_erro';
-		if(empty($igrejas->numero)) $erro[] = 'numero_erro';
-		if(empty($igrejas->complemento)) $erro[] = 'complemento_erro';
-		if(empty($igrejas->bairro)) $erro[] = 'bairro_erro';
+		# if(empty($igrejas->razao_social)) $erro[] = 'razao_social_erro';
+		# if(empty($igrejas->cnpj)) $erro[] = 'cnpj_erro';
+		# if(empty($igrejas->historia)) $erro[] = 'historia_erro';
+		# if(empty($igrejas->data_fundacao)) $erro[] = 'data_fundacao_erro';
 		if(empty($igrejas->cep)) $erro[] = 'cep_erro';
+		if(empty($igrejas->endereco)) $erro[] = 'endereco_erro';
+		# if(empty($igrejas->numero)) $erro[] = 'numero_erro';
+		# if(empty($igrejas->complemento)) $erro[] = 'complemento_erro';
+		if(empty($igrejas->bairro)) $erro[] = 'bairro_erro';
+		if(empty($igrejas->estado)) $erro[] = 'estado_erro';
+		if(empty($igrejas->cidade)) $erro[] = 'cidade_erro';
 		
 		return $erro;
 	}

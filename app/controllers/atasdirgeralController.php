@@ -19,30 +19,13 @@ class AtasDirgeralController extends Controller
 			
 		$resultsPerPage = 10;
 
-		#query
+		# query
 		$q = Doctrine_Query::create()
 			->from('AtasDirgeral a')
 			->where('1=1 ' . $sqlString)
 			->orderby('a.data_ata asc');
 
-		# criando o objeto pager
-		$pager = new Doctrine_Pager($q, $currentPage, $resultsPerPage);
-
-		# executa o pager
-		$pager->execute();
-
-		# dados da paginação
-		$paginacao = array('pagina_atual' => $pager->getPage(),
-						   'primeiro_indice' => $pager->getFirstIndice(),
-						   'ultimo_indice' => $pager->getLastIndice(),
-						   'total_resultados' => $pager->getNumResults(),
-						   'primeiro' => URL . 'atasdirgeral/index/?pg=' . $pager->getFirstPage(),
-						   'anterior' => URL . 'atasdirgeral/index/?pg=' . $pager->getPreviousPage(),
-						   'proximo' => URL . 'atasdirgeral/index/?pg=' . $pager->getNextPage(),
-						   'ultimo' => URL . 'atasdirgeral/index/?pg=' . $pager->getLastPage());
-		
-		return array('atasdirgeral' => $pager->execute()->toArray(),
-					 'paginacao' => $paginacao);
+		return $this->paginacao($q, 'atasdirgeral', $currentPage, $resultsPerPage);
 	}
 	
 	function salvar($atasdirgeral)
